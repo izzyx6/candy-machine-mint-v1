@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {useEffect, useState} from "react";
 import styled from "styled-components";
 import confetti from "canvas-confetti";
@@ -172,7 +173,7 @@ const Image = styled.img`
   border-radius: 7px;
   box-shadow: 5px 5px 40px 5px rgba(0,0,0,0.5);
 `;
-
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 const BorderLinearProgress = styled(LinearProgress)`
   margin: 20px;
   height: 10px !important;
@@ -203,6 +204,7 @@ const Home = (props: HomeProps) => {
     const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
     const [isActive, setIsActive] = useState(false); // true when countdown completes or whitelisted
     const [solanaExplorerLink, setSolanaExplorerLink] = useState<string>("");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [itemsAvailable, setItemsAvailable] = useState(0);
     const [itemsRedeemed, setItemsRedeemed] = useState(0);
     const [itemsRemaining, setItemsRemaining] = useState(0);
@@ -610,10 +612,10 @@ const Home = (props: HomeProps) => {
                                 }}
                                 renderer={renderEndDateCounter}
                               />}
-                            {wallet && isActive &&
+                            {/* {wallet && isActive &&
                               <h3>TOTAL MINTED : {itemsRedeemed} / {itemsAvailable}</h3>}
                             {wallet && isActive && <BorderLinearProgress variant="determinate"
-                                                                         value={100 - (itemsRemaining * 100 / itemsAvailable)}/>}
+                                                                         value={100 - (itemsRemaining * 100 / itemsAvailable)}/>} */}
                             <br/>
                             <MintButtonContainer>
                                 {!isActive && !isEnded && candyMachine?.state.goLiveDate && (!isWLOnly || whitelistTokenBalance > 0) ? (
