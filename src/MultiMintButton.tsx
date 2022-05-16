@@ -236,7 +236,7 @@ export const MultiMintButton = ({
                 >+</Plus>
             </div>
             {!candyMachine?.state.isSoldOut && !isSoldOut && isActive &&
-              <h3>Total estimated cost (Solana fees included) : {totalCost} SOL</h3>}
+              <h3>Total estimated cost (Solana fees included) : {totalCost.toFixed(4)} SOL</h3>}
         </div>
     );
 };
