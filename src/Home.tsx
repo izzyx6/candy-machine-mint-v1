@@ -199,6 +199,8 @@ export interface HomeProps {
     rpcHost: string;
 }
 
+let isWhiteListAddress = false;
+
 const Home = (props: HomeProps) => {
     const [balance, setBalance] = useState<number>();
     const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
@@ -247,6 +249,32 @@ const Home = (props: HomeProps) => {
             setItemsAvailable(cndy.state.itemsAvailable);
             setItemsRemaining(cndy.state.itemsRemaining);
             setItemsRedeemed(cndy.state.itemsRedeemed);
+
+
+            const walletAddress = wallet.publicKey.toString();
+            console.log(walletAddress);
+            //checking if user Address is whitelist or not      
+            const resp = await axios.get(
+                `http://localhost:9000/verify?walletAddress=${walletAddress}`
+              ); // eslint-disable-next-line
+              isWhiteListAddress = resp.data;
+        
+              //comment this conditional statement once in public sale
+              if (isWhiteListAddress === true) {
+                setAlertState({
+                  open: true,
+                  message: 'You Are Whitelisted To Mint!',
+                  severity: 'success',
+                });
+              }else if (isWhiteListAddress === false){
+                setAlertState({
+                    open: true,
+                    message: 'You Are Not Whitelisted To Mint!',
+                    severity: 'error',
+                  });
+              }
+
+
 
             var divider = 1;
             if (decimals) {
@@ -653,7 +681,9 @@ const Home = (props: HomeProps) => {
                                                 <MintButton
                                                     candyMachine={candyMachine}
                                                     isMinting={isMinting}
-                                                    isActive={isActive}
+                                                    
+                                                    //remove iswhiteListAddress for public sale
+                                                    isActive={(isActive && isWhiteListAddress)}
                                                     isEnded={isEnded}
                                                     isSoldOut={isSoldOut}
                                                     onMint={startMint}
@@ -672,6 +702,8 @@ const Home = (props: HomeProps) => {
                                                 candyMachine={candyMachine}
                                                 isMinting={isMinting}
                                                 isActive={isActive}
+                                                 //remove iswhiteListAddress for public sale
+                                                 isActive={(isActive && isWhiteListAddress)}
                                                 isEnded={isEnded}
                                                 isSoldOut={isSoldOut}
                                                 onMint={startMint}
