@@ -612,10 +612,10 @@ const Home = (props: HomeProps) => {
                                 }}
                                 renderer={renderEndDateCounter}
                               />}
-                                                        {/*wallet && isActive &&
+                                                       {wallet && isActive &&
                               <h3>TOTAL MINTED : {itemsRedeemed} / {itemsAvailable}</h3>}
                             {wallet && isActive && <BorderLinearProgress variant="determinate"
-                            value={100 - (itemsRemaining * 100 / itemsAvailable)}/>*/}
+                                                                         value={100 - (itemsRemaining * 100 / itemsAvailable)}/>}
                             <br/>
                             <MintButtonContainer>
                                 {!isActive && !isEnded && candyMachine?.state.goLiveDate && (!isWLOnly || whitelistTokenBalance > 0) ? (
